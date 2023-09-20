@@ -58,7 +58,18 @@ export class CalcComponent {
           this.total = this.total === 0 ? Number(param) : Number('' + this.total + param);
         }
         break;
+
+      case 'clear':
+        this.total = 0;
+        this.first_oper = null;
+        this.operator = null;
+        this.second_num = false;
+        this.history = [];
+        break;
+
+      case 'decimal':
+        if (!this.total.includes('.')) this.total += '.';
+        break;
     }
   }
-
 }
