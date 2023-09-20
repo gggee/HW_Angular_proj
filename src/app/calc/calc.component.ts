@@ -59,6 +59,20 @@ export class CalcComponent {
         }
         break;
 
+      case 'operator':
+        if (this.first_oper === null) {
+          this.first_oper = Number(this.total);
+        } else if (this.operator) {
+          const res = this.Calc_function(this.operator, Number(this.total));
+          const history_str = `${this.first_oper} ${this.operator} ${this.total} = ${res}`;
+          this.history.push(history_str); 
+          this.total = String(res);
+          this.first_oper = res;
+        }
+        this.operator = param;
+        this.second_num = true;
+        break;
+
       case 'clear':
         this.total = 0;
         this.first_oper = null;
@@ -72,4 +86,27 @@ export class CalcComponent {
         break;
     }
   }
+
+  private Calc_function(operator: string, secondNumber: any) {
+    switch (operator) {
+      case '+':
+        return this.first_oper + secondNumber;
+      case '-':
+        return this.first_oper - secondNumber;
+      case 'x':
+        return this.first_oper * secondNumber;
+      case '/':
+        if (secondNumber === 0) {
+          return 'division by zero';
+        }
+        return this.first_oper / secondNumber;
+      case '%':
+        return this.first_oper * (secondNumber / 100);
+      case '+/-':
+        return -this.first_oper;
+      default:
+        return secondNumber;
+    }
+  }
+
 }
