@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 export interface Tile {
   color: string;
@@ -48,6 +48,39 @@ export class CalcComponent {
     { text: '=', cols: 1, rows: 1, color: '#4E505F', type: 'button', click: 'operator' }
   ];
 
+  factorial(n: number): number {
+    if (n === 0) return 1;
+    return n * this.factorial(n - 1);
+  }
+
+  sqrt() {
+    this.total = Math.sqrt(this.total);
+  }
+  cube() {
+    this.total = Math.cbrt(this.total);
+  }
+  sin() {
+    this.total = Math.sin(this.total);
+  }
+  cos() {
+    this.total = Math.cos(this.total);
+  }
+  tan() {
+    this.total = Math.tan(this.total);
+  }
+  exp() {
+    this.total = Math.exp(this.total);
+  }
+  power(exponent: number) {
+    this.total = Math.pow(this.total, exponent);
+  }
+  ln() {
+    this.total = Math.log(this.total);
+  }
+  log() {
+    this.total = Math.log10(this.total);
+  }
+
   eventClick(event: string, param: any = null) {
     switch (event) {
       case 'number':
@@ -65,7 +98,7 @@ export class CalcComponent {
         } else if (this.operator) {
           const res = this.Calc_function(this.operator, Number(this.total));
           const history_str = `${this.first_oper} ${this.operator} ${this.total} = ${res}`;
-          this.history.push(history_str); 
+          this.history.push(history_str);
           this.total = String(res);
           this.first_oper = res;
         }
@@ -86,7 +119,6 @@ export class CalcComponent {
         break;
     }
   }
-
   private Calc_function(operator: string, secondNumber: any) {
     switch (operator) {
       case '+':
@@ -108,5 +140,4 @@ export class CalcComponent {
         return secondNumber;
     }
   }
-
 }
