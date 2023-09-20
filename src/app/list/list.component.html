@@ -1,0 +1,63 @@
+<h2>"{{toDoItem.name | uppercase}}" Details</h2>
+
+<div *ngIf="selectedItem">
+    <h2>{{selectedItem.name}}</h2>
+    <div>
+        <label>name:
+            <input (ngModel)="selectedItem.name" placeholder="name">
+        </label>
+    </div>
+    <div>
+        <label>isComplete:
+            <input type="checkbox" (ngModel)="selectedItem.isComplete">
+        </label>
+    </div>
+</div>
+
+<ul class="items">
+    <li *ngFor="let item of items" (click)="onSelect (item)" [class.selected]='item === selectedItem'>
+        <div><span>id: {{item.id}}</span></div>
+        <div><span>name: {{item.name}}</span></div>
+        <div><span>isComplete: {{item.isComplete}}</span></div>
+        
+        <div [ngSwitch]="item.id">
+            <p *ngSwitchCase="1">The Priority task!</p>
+            <p *ngSwitchDefault>Meh, relax</p>
+        </div>
+    </li>
+</ul>
+
+<div *ngIf="items.length >0">
+    <span> The length of the list: {{items.length}} {{items.length==1 ? 'item':'items'}}</span>
+</div>
+
+<hr>
+
+<div><span>id:{{toDoItem.id}}</span></div>
+<!-- <div><span>id:{{toDoItem.id | currency:'EUR'}}</span></div> -->
+<!-- <div><span>id:{{toDoItem.id | currency:'KZT'}}</span></div>
+<div><span>id:{{toDoItem.id | currency:'KZT':'symbol-narrow'}}</span></div> -->
+<!-- <div><span>id: <span>{{toDoItem.id  | percent}}</span></span></div>
+<div><span>id: <span>{{50  | percent}}</span></span></div> -->
+<br>
+
+<div><span>name: {{toDoItem.name}}</span></div>
+<!-- <div><span>name: {{toDoItem.name | slice:2:10}}</span></div> -->
+<div><span>isComplete: {{toDoItem.isComplete}}</span></div>
+
+<br>
+
+<div><span>id: {{7.5 | number:'1.1-2'}}</span></div>
+<div><span>id: {{2.25 | number:'2.1-2'}}</span></div>
+<div><span>id: {{1.125 | number:'2.1-2'}}</span></div>
+<div><span>id: {{10.125 | number:'1.1-2'}}</span></div>
+
+<br>
+
+<div><span>id:{{2000 | currency:'KZT':'symbol-narrow':'1.0-2'}}</span></div>
+
+<br>
+<!-- даты -->
+<div><span>id:{{'2023-07-03' | date:'d.M.Y'}}</span></div>
+<div><span>id:{{'2023-07-03' | date:'d.MMM.Y'}}</span></div>
+<div><span>id:{{'2023-07-03' | date:'long'}}</span></div>

@@ -1,0 +1,8 @@
+<p>feed works!</p>
+<article>
+    <article *ngFor="let post of posts">
+        <h2>{{post.title}}</h2>
+        <p>{{post.body}}</p>
+        <a href="/post/{{post.id}}">Read Full</a>
+    </article>
+</article>
